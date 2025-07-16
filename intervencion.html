@@ -1,1 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importancia de la Intervención Temprana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: Arial, sans-serif;
+            background: white url('https://i.imgur.com/feAW9RV.png') no-repeat;
+            background-size: contain;
+            background-position: right center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 2.6em;
+            font-weight: bold;
+            color: #CE1126;
+            margin-bottom: 8px;
+            position: relative;
+            animation: fadeInDown 1s ease-out 0.3s both;
+            text-align: center;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #FCDC00;
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.5s both;
+            text-align: center;
+        }
+
+        .highlight {
+            background: #FCDC00;
+            color: #333;
+            padding: 2px 6px;
+            font-weight: bold;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .card:nth-child(1) {
+            border-left: 4px solid #CE1126;
+            animation-delay: 0.7s;
+        }
+
+        .card:nth-child(2) {
+            border-left: 4px solid #003893;
+            animation-delay: 0.9s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            background: rgba(252, 220, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #FCDC00;
+        }
+
+        .card:nth-child(1) .card-title {
+            color: #CE1126;
+        }
+
+        .card:nth-child(2) .card-title {
+            color: #003893;
+        }
+
+        .card-content {
+            list-style: none;
+        }
+
+        .card-content li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+            color: #2c3e50;
+            opacity: 0;
+            animation: fadeInLeft 0.5s ease-out both;
+        }
+
+        .card:nth-child(1) .card-content li {
+            animation-delay: calc(1s + var(--delay));
+        }
+
+        .card:nth-child(2) .card-content li {
+            animation-delay: calc(1.2s + var(--delay));
+        }
+
+        .card-content li:nth-child(1) { --delay: 0.1s; }
+        .card-content li:nth-child(2) { --delay: 0.2s; }
+        .card-content li:nth-child(3) { --delay: 0.3s; }
+
+        .card-content li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .card:nth-child(1) .card-content li::before {
+            color: #e74c3c;
+        }
+
+        .card:nth-child(2) .card-content li::before {
+            color: #3498db;
+        }
+
+        .card-content li strong {
+            color: #2d3748;
+            font-weight: bold;
+        }
+
+        .citation {
+            margin-top: 20px;
+            font-style: italic;
+            color: #666;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .title {
+                font-size: 2em;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Importancia de la intervención temprana</h1>
+            <p class="subtitle">
+                La formación inicial constituye una <span class="highlight">ventana crítica de oportunidad</span> 
+                para la integración efectiva de tecnologías en la práctica docente futura:
+            </p>
+        </div>
+
+        <div class="content-grid">
+            <div class="card">
+                <h2 class="card-title">Limitaciones de la formación continua</h2>
+                <ul class="card-content">
+                    <li><strong>Patrones pedagógicos consolidados</strong> en docentes en ejercicio</li>
+                    <li><strong>Resistencia al cambio metodológico</strong> y prácticas establecidas</li>
+                    <li><strong>Impacto limitado</strong> de capacitaciones post-servicio</li>
+                </ul>
+                <p class="citation">(Garrido-Miranda, 2018)</p>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">Oportunidades en formación inicial</h2>
+                <ul class="card-content">
+                    <li><strong>Flexibilidad en rutinas pedagógicas</strong> no consolidadas</li>
+                    <li><strong>Actitudes en proceso de formación</strong> y moldeamiento</li>
+                    <li><strong>Posibilidad de integración desde el inicio</strong> de la práctica</li>
+                </ul>
+                <p class="citation">(Sadovsky, 2005; Astiz et al., 2012)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function animateCards() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animation = 'none';
+                card.offsetHeight; // Trigger reflow
+                card.style.animation = `fadeInUp 0.8s ease-out ${index * 0.2}s both`;
+                
+                const items = card.querySelectorAll('.card-content li');
+                items.forEach((item, i) => {
+                    item.style.animation = 'none';
+                    item.offsetHeight; // Trigger reflow
+                    item.style.animation = `fadeInLeft 0.5s ease-out ${0.5 + (i * 0.1)}s both`;
+                });
+            });
+        }
+
+        // Efecto de escritura para el título
+        function typeWriter() {
+            const title = document.querySelector('.title');
+            const text = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                }
+            }
+            type();
+        }
+
+        // Inicializar efectos cuando la página carga
+        window.addEventListener('load', function() {
+            setTimeout(typeWriter, 1000);
+        });
+
+        // Efecto de hover adicional para las tarjetas
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
