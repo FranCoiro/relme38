@@ -236,8 +236,8 @@
             <button class="quick-nav-btn" onclick="goToSlide(3)" title="Intervención temprana">I</button>
             <button class="quick-nav-btn" onclick="goToSlide(4)" title="Propósitos">Pr</button>
             <button class="quick-nav-btn" onclick="goToSlide(5)" title="Diseño metodológico">D</button>
-            <button class="quick-nav-btn" onclick="goToSlide(6)" title="Principales hallazgos">H1</button>
-            <button class="quick-nav-btn" onclick="goToSlide(7)" title="Hallazgos (continuación)">H2</button>
+            <button class="quick-nav-btn" onclick="goToSlide(6)" title="Hallazgos (parte 1)">H1</button>
+            <button class="quick-nav-btn" onclick="goToSlide(7)" title="Principales hallazgos">H2</button>
             <button class="quick-nav-btn" onclick="goToSlide(8)" title="Comparación de perfiles">C</button>
             <button class="quick-nav-btn" onclick="goToSlide(9)" title="Proyecciones">Py</button>
             <button class="quick-nav-btn" onclick="goToSlide(10)" title="Conclusiones">Co</button>
@@ -290,19 +290,19 @@
             </div>
         </div>
 
-        <!-- Slide 7: Principales hallazgos -->
-        <div class="slide">
-            <div class="slide-content">
-                <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="hallazgos.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
-            </div>
-        </div>
-
-        <!-- Slide 8: Hallazgos (continuación) -->
+        <!-- Slide 7: Hallazgos (parte 1) -->
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
                 <iframe class="content-iframe" src="hallazgos2.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
+            </div>
+        </div>
+
+        <!-- Slide 8: Principales hallazgos -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="loading">Cargando...</div>
+                <iframe class="content-iframe" src="hallazgos.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -351,7 +351,7 @@
     <div class="nav-controls">
         <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">13</span>
         </div>
         <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
     </div>
@@ -372,8 +372,8 @@
             'Intervención temprana',
             'Propósitos',
             'Diseño metodológico',
+            'Hallazgos (parte 1)',
             'Principales hallazgos',
-            'Hallazgos (continuación)',
             'Comparación de perfiles',
             'Proyecciones',
             'Conclusiones',
