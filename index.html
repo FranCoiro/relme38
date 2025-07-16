@@ -251,7 +251,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/fotosactuales.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="fotosactuales.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -259,7 +259,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/estadoactual.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="estadoactual.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -267,7 +267,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/intervencion.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="intervencion.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -275,7 +275,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/propositos.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="propositos.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -283,7 +283,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/diseño.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="diseño.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -291,7 +291,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/hallazgos.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="hallazgos.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -299,7 +299,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/comparacion.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="comparacion.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -307,7 +307,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/proyecciones.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="proyecciones.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -315,7 +315,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/conclusiones.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="conclusiones.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -323,7 +323,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/agradecimientos.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="agradecimientos.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
 
@@ -331,7 +331,7 @@
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="https://francoiro.github.io/relme38/referencias.html" onload="hideLoading(this)"></iframe>
+                <iframe class="content-iframe" src="referencias.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
             </div>
         </div>
     </div>
@@ -373,6 +373,13 @@
             const loadingDiv = iframe.parentElement.querySelector('.loading');
             if (loadingDiv) {
                 loadingDiv.style.display = 'none';
+            }
+        }
+
+        function showError(iframe) {
+            const loadingDiv = iframe.parentElement.querySelector('.loading');
+            if (loadingDiv) {
+                loadingDiv.innerHTML = '<div class="error-message">⚠️ No se pudo cargar el contenido<br><small>Verifica que el archivo existe</small></div>';
             }
         }
 
