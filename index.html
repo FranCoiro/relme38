@@ -41,8 +41,10 @@
         /* Slide 1 - Portada */
         .slide-1 {
             background-image: url('https://i.imgur.com/qFx9uFk.png');
-            background-size: cover;
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000;
         }
 
         /* Slides 2-12 - Contenido con iframe */
@@ -228,18 +230,18 @@
 
         <!-- Quick navigation -->
         <div class="quick-nav">
-            <button class="quick-nav-btn active" onclick="goToSlide(0)">P</button>
-            <button class="quick-nav-btn" onclick="goToSlide(1)">1</button>
-            <button class="quick-nav-btn" onclick="goToSlide(2)">2</button>
-            <button class="quick-nav-btn" onclick="goToSlide(3)">3</button>
-            <button class="quick-nav-btn" onclick="goToSlide(4)">4</button>
-            <button class="quick-nav-btn" onclick="goToSlide(5)">5</button>
-            <button class="quick-nav-btn" onclick="goToSlide(6)">6</button>
-            <button class="quick-nav-btn" onclick="goToSlide(7)">7</button>
-            <button class="quick-nav-btn" onclick="goToSlide(8)">8</button>
-            <button class="quick-nav-btn" onclick="goToSlide(9)">9</button>
-            <button class="quick-nav-btn" onclick="goToSlide(10)">10</button>
-            <button class="quick-nav-btn" onclick="goToSlide(11)">11</button>
+            <button class="quick-nav-btn active" onclick="goToSlide(0)" title="Portada">P</button>
+            <button class="quick-nav-btn" onclick="goToSlide(1)" title="Fotos actuales">F</button>
+            <button class="quick-nav-btn" onclick="goToSlide(2)" title="Estado actual">E</button>
+            <button class="quick-nav-btn" onclick="goToSlide(3)" title="Intervención temprana">I</button>
+            <button class="quick-nav-btn" onclick="goToSlide(4)" title="Propósitos">Pr</button>
+            <button class="quick-nav-btn" onclick="goToSlide(5)" title="Diseño metodológico">D</button>
+            <button class="quick-nav-btn" onclick="goToSlide(6)" title="Principales hallazgos">H</button>
+            <button class="quick-nav-btn" onclick="goToSlide(7)" title="Comparación de perfiles">C</button>
+            <button class="quick-nav-btn" onclick="goToSlide(8)" title="Proyecciones">Py</button>
+            <button class="quick-nav-btn" onclick="goToSlide(9)" title="Conclusiones">Co</button>
+            <button class="quick-nav-btn" onclick="goToSlide(10)" title="Agradecimientos">A</button>
+            <button class="quick-nav-btn" onclick="goToSlide(11)" title="Referencias">R</button>
         </div>
 
         <!-- Slide 1: Portada -->
@@ -379,7 +381,7 @@
         function showError(iframe) {
             const loadingDiv = iframe.parentElement.querySelector('.loading');
             if (loadingDiv) {
-                loadingDiv.innerHTML = '<div class="error-message">⚠️ No se pudo cargar el contenido<br><small>Verifica que el archivo existe</small></div>';
+                loadingDiv.innerHTML = `<div class="error-message">⚠️ No se pudo cargar: ${iframe.src}<br><small>Verifica que el archivo existe y es válido</small></div>`;
             }
         }
 
