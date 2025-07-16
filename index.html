@@ -236,12 +236,13 @@
             <button class="quick-nav-btn" onclick="goToSlide(3)" title="Intervención temprana">I</button>
             <button class="quick-nav-btn" onclick="goToSlide(4)" title="Propósitos">Pr</button>
             <button class="quick-nav-btn" onclick="goToSlide(5)" title="Diseño metodológico">D</button>
-            <button class="quick-nav-btn" onclick="goToSlide(6)" title="Principales hallazgos">H</button>
-            <button class="quick-nav-btn" onclick="goToSlide(7)" title="Comparación de perfiles">C</button>
-            <button class="quick-nav-btn" onclick="goToSlide(8)" title="Proyecciones">Py</button>
-            <button class="quick-nav-btn" onclick="goToSlide(9)" title="Conclusiones">Co</button>
-            <button class="quick-nav-btn" onclick="goToSlide(10)" title="Agradecimientos">A</button>
-            <button class="quick-nav-btn" onclick="goToSlide(11)" title="Referencias">R</button>
+            <button class="quick-nav-btn" onclick="goToSlide(6)" title="Principales hallazgos">H1</button>
+            <button class="quick-nav-btn" onclick="goToSlide(7)" title="Hallazgos (continuación)">H2</button>
+            <button class="quick-nav-btn" onclick="goToSlide(8)" title="Comparación de perfiles">C</button>
+            <button class="quick-nav-btn" onclick="goToSlide(9)" title="Proyecciones">Py</button>
+            <button class="quick-nav-btn" onclick="goToSlide(10)" title="Conclusiones">Co</button>
+            <button class="quick-nav-btn" onclick="goToSlide(11)" title="Agradecimientos">A</button>
+            <button class="quick-nav-btn" onclick="goToSlide(12)" title="Referencias">R</button>
         </div>
 
         <!-- Slide 1: Portada -->
@@ -297,7 +298,15 @@
             </div>
         </div>
 
-        <!-- Slide 8: Comparación de perfiles -->
+        <!-- Slide 8: Hallazgos (continuación) -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="loading">Cargando...</div>
+                <iframe class="content-iframe" src="hallazgos2.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
+            </div>
+        </div>
+
+        <!-- Slide 9: Comparación de perfiles -->
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
@@ -354,7 +363,7 @@
 
     <script>
         let currentSlideIndex = 0;
-        const totalSlides = 12;
+        const totalSlides = 13;
         
         const slideTitles = [
             'Portada',
@@ -364,6 +373,7 @@
             'Propósitos',
             'Diseño metodológico',
             'Principales hallazgos',
+            'Hallazgos (continuación)',
             'Comparación de perfiles',
             'Proyecciones',
             'Conclusiones',
