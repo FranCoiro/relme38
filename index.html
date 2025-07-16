@@ -1,1 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación RELME 38</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #333;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Slideshow container */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Individual slides */
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        /* Slide 1 - Portada */
+        .slide-1 {
+            background-image: url('https://i.imgur.com/qFx9uFk.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Slide 2 - Menú de navegación */
+        .slide-2 {
+            background: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #CE1126;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 3px solid #FCDC00;
+            padding-bottom: 10px;
+        }
+
+        .menu-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .menu-item {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            border-color: #CE1126;
+            box-shadow: 0 4px 12px rgba(206, 17, 38, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .menu-item-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2d3748;
+        }
+
+        .menu-item-description {
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #666;
+        }
+
+        .menu-number {
+            background: #003893;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Navigation controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(206, 17, 38, 0.9);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #CE1126;
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Back button for slide 2 */
+        .back-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: #003893;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: #002760;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide-2 {
+                padding: 30px 20px;
+            }
+            
+            .menu-title {
+                font-size: 2em;
+            }
+            
+            .menu-subtitle {
+                font-size: 1em;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .menu-item {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <!-- Slide 1: Portada -->
+        <div class="slide slide-1 active">
+            <!-- La imagen de portada se muestra como fondo -->
+        </div>
+
+        <!-- Slide 2: Menú de navegación -->
+        <div class="slide slide-2">
+            <button class="back-btn" onclick="changeSlide(-1)">← Portada</button>
+            
+            <h1 class="menu-title">Presentación RELME 38</h1>
+            <p class="menu-subtitle">Selecciona la sección que deseas revisar</p>
+            
+            <div class="menu-grid">
+                <a href="https://francoiro.github.io/relme38/fotosactuales.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">1</div>
+                        Fotos actuales
+                    </div>
+                    <div class="menu-item-description">
+                        Registro visual del contexto y participantes
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/estadoactual.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">2</div>
+                        Estado actual
+                    </div>
+                    <div class="menu-item-description">
+                        Marco teórico y problemática identificada
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/intervencion.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">3</div>
+                        Intervención temprana
+                    </div>
+                    <div class="menu-item-description">
+                        Importancia de la formación inicial
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/propositos.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">4</div>
+                        Propósitos
+                    </div>
+                    <div class="menu-item-description">
+                        Objetivos de la investigación
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/diseño.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">5</div>
+                        Diseño metodológico
+                    </div>
+                    <div class="menu-item-description">
+                        Enfoque y metodología del estudio
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/hallazgos.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">6</div>
+                        Principales hallazgos
+                    </div>
+                    <div class="menu-item-description">
+                        Percepciones y obstáculos identificados
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/comparacion.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">7</div>
+                        Comparación de perfiles
+                    </div>
+                    <div class="menu-item-description">
+                        Perfil ideal vs percepciones actuales
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/proyecciones.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">8</div>
+                        Proyecciones
+                    </div>
+                    <div class="menu-item-description">
+                        Implicaciones y líneas futuras
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/conclusiones.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">9</div>
+                        Conclusiones
+                    </div>
+                    <div class="menu-item-description">
+                        Síntesis de resultados principales
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/agradecimientos.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">10</div>
+                        Agradecimientos
+                    </div>
+                    <div class="menu-item-description">
+                        Reconocimientos institucionales
+                    </div>
+                </a>
+
+                <a href="https://francoiro.github.io/relme38/referencias.html" class="menu-item">
+                    <div class="menu-item-title">
+                        <div class="menu-number">11</div>
+                        Referencias
+                    </div>
+                    <div class="menu-item-description">
+                        Bibliografía consultada
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+        <div class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">2</span>
+        </div>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const totalSlides = 2;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Ensure index is within bounds
+            if (n >= totalSlides) currentSlideIndex = 0;
+            if (n < 0) currentSlideIndex = totalSlides - 1;
+            
+            // Show current slide
+            slides[currentSlideIndex].classList.add('active');
+            
+            // Update counter
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            showSlide(currentSlideIndex);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+        document.getElementById('totalSlides').textContent = totalSlides;
+    </script>
+</body>
+</html>
