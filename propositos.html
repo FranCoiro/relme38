@@ -16,24 +16,27 @@
             background: white url('https://i.imgur.com/KXiUrDX.png') no-repeat;
             background-size: contain;
             background-position: right center;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
             color: #333;
             line-height: 1.4;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .container {
-            max-width: 1200px;
-            width: 100%;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            margin: 0 auto;
+            padding: 40px 60px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(5px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 40px;
-            animation: slideIn 0.8s ease-out;
         }
 
         @keyframes slideIn {
@@ -48,7 +51,8 @@
         }
 
         .header {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            flex-shrink: 0;
         }
 
         .title {
@@ -58,53 +62,46 @@
             margin-bottom: 8px;
             position: relative;
             animation: fadeInDown 1s ease-out 0.3s both;
-        }
-
-        .title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: #FCDC00;
-            border-radius: 2px;
+            border-bottom: 4px solid #FCDC00;
+            padding-bottom: 8px;
         }
 
         .content-wrapper {
             display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 40px;
-            margin-top: 30px;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
+            flex: 1;
+            align-items: start;
         }
 
         .main-content {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 25px;
+            height: 100%;
         }
 
         .objetivo-general {
             background: rgba(252, 220, 0, 0.1);
             border: 3px solid #FCDC00;
             border-radius: 12px;
-            padding: 25px;
+            padding: 20px;
             animation: fadeInUp 0.8s ease-out 0.5s both;
         }
 
         .objetivo-general-title {
-            font-size: 1.4em;
+            font-size: 1.3em;
             font-weight: bold;
             color: #CE1126;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .objetivo-general-text {
-            font-size: 1.1em;
+            font-size: 1.05em;
             color: #2d3748;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .objetivos-especificos {
