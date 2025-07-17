@@ -421,6 +421,16 @@
             }
         }
 
+        // Hide loading after a timeout as fallback
+        function hideLoadingAfterTimeout(iframe) {
+            setTimeout(() => {
+                const loadingDiv = iframe.parentElement.querySelector('.loading');
+                if (loadingDiv && loadingDiv.style.display !== 'none') {
+                    loadingDiv.style.display = 'none';
+                }
+            }, 3000); // Hide after 3 seconds
+        }
+
         function showSlide(n) {
             const slides = document.querySelectorAll('.slide');
             const quickNavBtns = document.querySelectorAll('.quick-nav-btn');
