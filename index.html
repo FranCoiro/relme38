@@ -322,15 +322,7 @@
             </div>
         </div>
 
-        <!-- Slide 8: Principales hallazgos -->
-        <div class="slide">
-            <div class="slide-content">
-                <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="hallazgos.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
-            </div>
-        </div>
-
-        <!-- Slide 9: Comparación de perfiles -->
+        <!-- Slide 8: Comparación de perfiles -->
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
@@ -417,16 +409,6 @@
             if (loadingDiv) {
                 loadingDiv.innerHTML = `<div class="error-message">⚠️ No se pudo cargar: ${iframe.src}<br><small>Verifica que el archivo existe y es válido</small></div>`;
             }
-        }
-
-        // Hide loading after a timeout as fallback
-        function hideLoadingAfterTimeout(iframe) {
-            setTimeout(() => {
-                const loadingDiv = iframe.parentElement.querySelector('.loading');
-                if (loadingDiv && loadingDiv.style.display !== 'none') {
-                    loadingDiv.style.display = 'none';
-                }
-            }, 3000); // Hide after 3 seconds
         }
 
         function showSlide(n) {
