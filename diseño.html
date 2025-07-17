@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diseño Metodológico</title>
+    <title>Propósitos de la Investigación</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: white url('https://i.imgur.com/feAW9RV.png') no-repeat;
+            background: white url('https://i.imgur.com/KXiUrDX.png') no-repeat;
             background-size: contain;
             background-position: right center;
             margin: 0;
@@ -24,13 +24,17 @@
             overflow: hidden;
         }
 
+        body::before {
+            display: none;
+        }
+
         .container {
             width: 100vw;
             height: 100vh;
             max-width: 1920px;
             max-height: 1080px;
             margin: 0 auto;
-            padding: 30px 50px;
+            padding: 40px 60px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -39,235 +43,205 @@
             backdrop-filter: blur(5px);
         }
 
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .header {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             flex-shrink: 0;
         }
 
         .title {
-            font-size: 2.4em;
+            font-size: 2.6em;
             font-weight: bold;
             color: #CE1126;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             position: relative;
             animation: fadeInDown 1s ease-out 0.3s both;
             border-bottom: 4px solid #FCDC00;
-            padding-bottom: 6px;
-        }
-
-        .subtitle {
-            font-size: 1em;
-            color: #333;
-            margin-bottom: 15px;
-            line-height: 1.3;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-
-        .highlight {
-            background: #FCDC00;
-            color: #333;
-            padding: 2px 6px;
-            font-weight: bold;
+            padding-bottom: 8px;
         }
 
         .content-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
             flex: 1;
-            align-items: stretch;
+            align-items: start;
         }
 
-        .left-column {
+        .main-content {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 25px;
+            height: 100%;
         }
 
-        .right-column {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.9);
+        .objetivo-general {
+            background: rgba(252, 220, 0, 0.1);
+            border: 3px solid #FCDC00;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .objetivo-general-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #CE1126;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .objetivo-general-text {
+            font-size: 1.05em;
+            color: #2d3748;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .objetivos-especificos {
+            animation: fadeInLeft 0.8s ease-out 0.7s both;
+        }
+
+        .objetivos-especificos-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #003893;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #003893;
+        }
+
+        .objetivo-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(240, 244, 255, 0.5);
+            border-radius: 10px;
+            border-left: 4px solid #003893;
             transition: all 0.3s ease;
             opacity: 0;
-            animation: fadeInUp 0.8s ease-out both;
+            animation: fadeInLeft 0.6s ease-out both;
+        }
+
+        .objetivo-item:nth-child(2) { animation-delay: 0.9s; }
+        .objetivo-item:nth-child(3) { animation-delay: 1.1s; }
+        .objetivo-item:nth-child(4) { animation-delay: 1.3s; }
+        .objetivo-item:nth-child(5) { animation-delay: 1.5s; }
+
+        .objetivo-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 15px rgba(0, 56, 147, 0.2);
+            background: rgba(0, 56, 147, 0.1);
+        }
+
+        .objetivo-numero {
+            background: #003893;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-right: 15px;
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .objetivo-texto {
+            color: #2d3748;
+            line-height: 1.4;
+            font-size: 1em;
+        }
+
+        .caso-estudio {
+            background: rgba(255, 255, 255, 0.9);
+            border: 3px solid #CE1126;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            animation: fadeInRight 0.8s ease-out 0.9s both;
             position: relative;
             overflow: hidden;
         }
 
-        .card::before {
+        .caso-estudio::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 5px;
+            background: linear-gradient(90deg, #CE1126, #FCDC00);
         }
 
-        .card.enfoque::before {
-            background: #003893;
-        }
-
-        .card.participantes::before {
-            background: #CE1126;
-        }
-
-        .card.justificacion::before {
-            background: #FCDC00;
-        }
-
-        .card.dimensiones::before {
-            background: #003893;
-        }
-
-        .card:nth-child(1) { animation-delay: 0.6s; }
-        .card:nth-child(2) { animation-delay: 0.8s; }
-        .card:nth-child(3) { animation-delay: 1.0s; }
-        .card:nth-child(4) { animation-delay: 1.2s; }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .card-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .card.enfoque .card-title {
-            color: #003893;
-            border-bottom-color: #003893;
-        }
-
-        .card.participantes .card-title {
-            color: #CE1126;
-            border-bottom-color: #CE1126;
-        }
-
-        .card.justificacion .card-title {
-            color: #CE1126;
-            border-bottom-color: #FCDC00;
-        }
-
-        .card.dimensiones .card-title {
-            color: #003893;
-            border-bottom-color: #003893;
-        }
-
-        .card-content {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .card-content li {
-            margin-bottom: 12px;
-            padding-left: 20px;
-            position: relative;
-            line-height: 1.3;
-            color: #2d3748;
-            font-size: 0.95em;
-        }
-
-        .card-content li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
+        .caso-estudio-title {
             font-size: 1.2em;
             font-weight: bold;
-        }
-
-        .card.enfoque .card-content li::before {
             color: #003893;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #003893;
         }
 
-        .card.participantes .card-content li::before {
-            color: #CE1126;
-        }
-
-        .card.justificacion .card-content li::before {
-            color: #FCDC00;
-        }
-
-        .card.dimensiones .card-content li::before {
-            color: #003893;
-        }
-
-        .card-content li strong {
-            color: #2d3748;
+        .robotica-title {
+            font-size: 1.6em;
             font-weight: bold;
+            color: #CE1126;
+            margin-bottom: 10px;
         }
 
-        .dimensiones-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .como-integracion {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        .componentes {
+            display: flex;
+            flex-direction: column;
             gap: 10px;
-            margin-top: 10px;
         }
 
-        .dimension-item {
-            background: rgba(240, 244, 255, 0.5);
-            border: 2px solid #003893;
+        .componente {
+            background: rgba(252, 220, 0, 0.2);
+            border: 2px solid #FCDC00;
             border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dimension-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 20px;
-            height: 100%;
-            background: #CE1126;
-            transition: width 0.3s ease;
-        }
-
-        .dimension-item:hover::before {
-            width: 100%;
-        }
-
-        .dimension-item:hover {
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .dimension-number {
-            font-weight: bold;
-            font-size: 1.1em;
+            padding: 10px 15px;
+            font-weight: 500;
             color: #CE1126;
-            position: relative;
-            z-index: 1;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out both;
         }
 
-        .dimension-text {
-            font-size: 0.85em;
-            color: #2d3748;
-            margin-top: 5px;
-            position: relative;
-            z-index: 1;
-            transition: color 0.3s ease;
-        }
+        .componente:nth-child(1) { animation-delay: 1.2s; }
+        .componente:nth-child(2) { animation-delay: 1.4s; }
+        .componente:nth-child(3) { animation-delay: 1.6s; }
+        .componente:nth-child(4) { animation-delay: 1.8s; }
 
-        .dimension-item:hover .dimension-number,
-        .dimension-item:hover .dimension-text {
-            color: white;
+        .componente:hover {
+            background: #FCDC00;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(252, 220, 0, 0.4);
         }
 
         @keyframes fadeInDown {
@@ -314,58 +288,39 @@
             }
         }
 
-        @media (max-width: 1200px) {
-            .container {
-                padding: 30px 40px;
-            }
-            
-            .title {
-                font-size: 2.2em;
-            }
-        }
-
         @media (max-width: 1024px) {
             .content-wrapper {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 30px;
+            }
+            
+            .caso-estudio {
+                max-width: 400px;
+                margin: 0 auto;
             }
         }
 
         @media (max-width: 768px) {
+            .title {
+                font-size: 2em;
+            }
+            
             .container {
                 padding: 20px;
-                height: auto;
-                overflow: visible;
-            }
-            
-            body {
-                height: auto;
-                overflow: visible;
-            }
-            
-            .title {
-                font-size: 1.8em;
             }
             
             .content-wrapper {
-                gap: 15px;
+                gap: 20px;
             }
             
-            .dimensiones-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Print styles */
-        @media print {
-            body {
-                height: auto;
-                overflow: visible;
+            .objetivo-item {
+                flex-direction: column;
+                text-align: center;
             }
             
-            .container {
-                height: auto;
-                page-break-inside: avoid;
+            .objetivo-numero {
+                margin-right: 0;
+                margin-bottom: 10px;
             }
         }
     </style>
@@ -373,62 +328,61 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="title">Diseño metodológico</h1>
-            <p class="subtitle">
-                Estudio <span class="highlight">cualitativo exploratorio</span> orientado a identificar percepciones sobre tecnologías educativas en formación inicial docente:
-            </p>
+            <h1 class="title">Propósitos de la investigación</h1>
         </div>
 
         <div class="content-wrapper">
-            <div class="left-column">
-                <div class="card enfoque">
-                    <h2 class="card-title">Enfoque y técnica</h2>
-                    <ul class="card-content">
-                        <li><strong>Paradigma:</strong> cualitativo exploratorio</li>
-                        <li><strong>Técnica:</strong> focus group</li>
-                        <li><strong>Caso de estudio:</strong> robótica educativa como integración tecnológica</li>
-                    </ul>
+            <div class="main-content">
+                <div class="objetivo-general">
+                    <h2 class="objetivo-general-title">Objetivo General</h2>
+                    <p class="objetivo-general-text">
+                        Explorar percepciones de futuros docentes sobre tecnologías aplicadas a matemáticas
+                    </p>
                 </div>
 
-                <div class="card justificacion">
-                    <h2 class="card-title">Justificación muestral</h2>
-                    <ul class="card-content">
-                        <li><strong>Muestra intencional</strong> de "mejor escenario"</li>
-                        <li><strong>Lógica:</strong> si participantes motivados presentan limitaciones, indica desafío sistémico</li>
-                    </ul>
+                <div class="objetivos-especificos">
+                    <h2 class="objetivos-especificos-title">Objetivos Específicos</h2>
+                    
+                    <div class="objetivo-item">
+                        <div class="objetivo-numero">1</div>
+                        <div class="objetivo-texto">
+                            Identificar percepciones actuales sobre tecnologías educativas
+                        </div>
+                    </div>
+
+                    <div class="objetivo-item">
+                        <div class="objetivo-numero">2</div>
+                        <div class="objetivo-texto">
+                            Analizar brechas entre perfil competencial ideal y percepciones actuales
+                        </div>
+                    </div>
+
+                    <div class="objetivo-item">
+                        <div class="objetivo-numero">3</div>
+                        <div class="objetivo-texto">
+                            Generar evidencia para evaluación a mayor escala
+                        </div>
+                    </div>
+
+                    <div class="objetivo-item">
+                        <div class="objetivo-numero">4</div>
+                        <div class="objetivo-texto">
+                            Proporcionar insumos para mejora de programas formativos
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="right-column">
-                <div class="card participantes">
-                    <h2 class="card-title">Participantes</h2>
-                    <ul class="card-content">
-                        <li><strong>12 futuros docentes</strong> de educación primaria</li>
-                        <li><strong>Criterio:</strong> alta disposición tecnológica</li>
-                        <li><strong>Contexto:</strong> participación en Feria Matemática - "Espacio Tecnológico"</li>
-                    </ul>
-                </div>
-
-                <div class="card dimensiones">
-                    <h2 class="card-title">Dimensiones exploradas</h2>
-                    <div class="dimensiones-grid">
-                        <div class="dimension-item">
-                            <div class="dimension-number">1</div>
-                            <div class="dimension-text">Experiencia con robótica educativa</div>
-                        </div>
-                        <div class="dimension-item">
-                            <div class="dimension-number">2</div>
-                            <div class="dimension-text">Impacto formativo percibido</div>
-                        </div>
-                        <div class="dimension-item">
-                            <div class="dimension-number">3</div>
-                            <div class="dimension-text">Dificultades y barreras identificadas</div>
-                        </div>
-                        <div class="dimension-item">
-                            <div class="dimension-number">4</div>
-                            <div class="dimension-text">Necesidades formativas reportadas</div>
-                        </div>
-                    </div>
+            <div class="caso-estudio">
+                <h3 class="caso-estudio-title">Caso de estudio</h3>
+                <h4 class="robotica-title">Robótica educativa</h4>
+                <p class="como-integracion">como integración de:</p>
+                
+                <div class="componentes">
+                    <div class="componente">Programación</div>
+                    <div class="componente">Pensamiento lógico</div>
+                    <div class="componente">Pensamiento crítico</div>
+                    <div class="componente">Matemáticas</div>
                 </div>
             </div>
         </div>
@@ -457,75 +411,30 @@
             setTimeout(typeWriter, 1000);
         });
 
-        // Efectos especiales para las tarjetas
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Animación especial para las dimensiones
-        document.querySelectorAll('.dimension-item').forEach((item, index) => {
+        // Efecto de hover adicional para los objetivos
+        document.querySelectorAll('.objetivo-item').forEach(item => {
             item.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.1) rotate(2deg)';
+                const numero = this.querySelector('.objetivo-numero');
+                numero.style.transform = 'scale(1.2) rotate(360deg)';
+                numero.style.transition = 'transform 0.5s ease';
             });
             
             item.addEventListener('mouseleave', function() {
+                const numero = this.querySelector('.objetivo-numero');
+                numero.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Animación especial para los componentes del caso de estudio
+        document.querySelectorAll('.componente').forEach((componente, index) => {
+            componente.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotate(2deg)';
+            });
+            
+            componente.addEventListener('mouseleave', function() {
                 this.style.transform = 'scale(1) rotate(0deg)';
             });
-
-            // Animación secuencial al cargar
-            setTimeout(() => {
-                item.style.opacity = '0';
-                item.style.animation = `fadeInUp 0.6s ease-out ${0.5 + (index * 0.1)}s both`;
-            }, 1500);
         });
-
-        // Efecto de onda en las tarjetas al hacer clic
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                const ripple = document.createElement('div');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(206, 17, 38, 0.1);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                `;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // Agregar animación de ripple al CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(2);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
