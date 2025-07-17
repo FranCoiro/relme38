@@ -17,6 +17,10 @@
             color: white;
             overflow: hidden;
             height: 100vh;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         /* Slideshow container */
@@ -81,17 +85,16 @@
             display: flex;
             gap: 15px;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 12px 20px;
             border-radius: 25px;
             backdrop-filter: blur(10px);
-            cursor: move;
-            user-select: none;
             transition: opacity 0.3s ease;
+            touch-action: manipulation;
         }
         
         .nav-controls:hover {
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
         }
         
         .nav-controls.dragging {
@@ -106,6 +109,8 @@
             font-size: 12px;
             margin-right: 8px;
             cursor: grab;
+            padding: 4px;
+            touch-action: none;
         }
         
         .drag-handle:active {
@@ -116,17 +121,29 @@
             background: #CE1126;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.9em;
             font-weight: bold;
             transition: all 0.2s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-btn:hover {
             background: #ff1a40;
             transform: translateY(-1px);
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
+            background: #b30e20;
         }
 
         .nav-btn:disabled {
@@ -137,12 +154,14 @@
 
         .slide-counter {
             color: white;
-            padding: 8px 12px;
+            padding: 10px 12px;
             font-size: 0.9em;
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
+            min-width: 60px;
+            justify-content: center;
         }
 
         /* Slide title indicator */
@@ -176,17 +195,26 @@
             background: none;
             color: white;
             border: 1px solid #666;
-            padding: 4px 8px;
+            padding: 6px 10px;
             margin: 2px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.8em;
             transition: all 0.2s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            min-width: 32px;
+            min-height: 32px;
         }
 
         .quick-nav-btn:hover {
             background: #CE1126;
             border-color: #CE1126;
+        }
+
+        .quick-nav-btn:active {
+            background: #b30e20;
+            border-color: #b30e20;
         }
 
         .quick-nav-btn.active {
@@ -223,27 +251,66 @@
             z-index: 10;
         }
 
+        /* Swipe indicator for mobile */
+        .swipe-indicator {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            z-index: 999;
+            opacity: 0.8;
+            display: none;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-controls {
                 bottom: 10px;
                 gap: 10px;
-                padding: 8px 15px;
+                padding: 10px 15px;
             }
             
             .nav-btn {
-                padding: 6px 12px;
+                padding: 8px 14px;
                 font-size: 0.8em;
+                min-width: 40px;
+                min-height: 40px;
+            }
+            
+            .drag-handle {
+                display: none;
             }
             
             .quick-nav {
-                display: none;
+                top: 10px;
+                right: 10px;
+                padding: 8px;
+            }
+            
+            .quick-nav-btn {
+                padding: 4px 8px;
+                font-size: 0.7em;
+                min-width: 28px;
+                min-height: 28px;
             }
             
             .slide-title-indicator {
                 top: 10px;
                 font-size: 0.8em;
                 padding: 6px 15px;
+            }
+            
+            .keyboard-hint {
+                display: none;
+            }
+            
+            .swipe-indicator {
+                display: block;
             }
         }
     </style>
@@ -267,6 +334,11 @@
             <button class="quick-nav-btn" onclick="goToSlide(9)" title="Conclusiones">Co</button>
             <button class="quick-nav-btn" onclick="goToSlide(10)" title="Agradecimientos">A</button>
             <button class="quick-nav-btn" onclick="goToSlide(11)" title="Referencias">R</button>
+        </div>
+
+        <!-- Swipe indicator for mobile -->
+        <div class="swipe-indicator">
+            👆 Desliza o usa los botones para navegar
         </div>
 
         <!-- Slide 1: Portada -->
@@ -450,6 +522,76 @@
             showSlide(currentSlideIndex);
         }
 
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+        let isSwiping = false;
+
+        function handleTouchStart(e) {
+            // Only handle swipes on the slideshow container, not on nav controls
+            if (e.target.closest('.nav-controls') || e.target.closest('.quick-nav')) {
+                return;
+            }
+            
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            isSwiping = false;
+        }
+
+        function handleTouchMove(e) {
+            if (!touchStartX || !touchStartY) return;
+            
+            touchEndX = e.touches[0].clientX;
+            touchEndY = e.touches[0].clientY;
+            
+            const deltaX = touchStartX - touchEndX;
+            const deltaY = touchStartY - touchEndY;
+            
+            // Only prevent default if it's a horizontal swipe
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 30) {
+                e.preventDefault();
+                isSwiping = true;
+            }
+        }
+
+        function handleTouchEnd(e) {
+            if (!touchStartX || !touchStartY || !isSwiping) {
+                touchStartX = 0;
+                touchStartY = 0;
+                return;
+            }
+            
+            const deltaX = touchStartX - touchEndX;
+            const deltaY = touchStartY - touchEndY;
+            
+            // Minimum swipe distance
+            const minSwipeDistance = 50;
+            
+            // Check if it's a horizontal swipe
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+                if (deltaX > 0) {
+                    // Swipe left - next slide
+                    changeSlide(1);
+                } else {
+                    // Swipe right - previous slide
+                    changeSlide(-1);
+                }
+            }
+            
+            touchStartX = 0;
+            touchStartY = 0;
+            touchEndX = 0;
+            touchEndY = 0;
+            isSwiping = false;
+        }
+
+        // Add touch event listeners to slideshow container
+        document.addEventListener('touchstart', handleTouchStart, { passive: false });
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('touchend', handleTouchEnd, { passive: true });
+
         // Keyboard navigation
         document.addEventListener('keydown', function(event) {
             if (event.key === 'ArrowLeft') {
@@ -472,24 +614,27 @@
         showSlide(0);
         document.getElementById('totalSlides').textContent = totalSlides;
         
-        // Make navigation controls draggable
-        initDraggableNavControls();
+        // Make navigation controls draggable (only on desktop)
+        if (window.innerWidth > 768) {
+            initDraggableNavControls();
+        }
         
         function initDraggableNavControls() {
             const navControls = document.getElementById('navControls');
+            const dragHandle = navControls.querySelector('.drag-handle');
             let isDragging = false;
             let startX, startY, initialX, initialY;
             
             function startDrag(e) {
+                // Only start drag if clicking on the drag handle
+                if (!e.target.closest('.drag-handle')) return;
+                
                 isDragging = true;
                 navControls.classList.add('dragging');
                 
-                // Get initial mouse/touch position
-                const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-                const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
-                
-                startX = clientX;
-                startY = clientY;
+                // Get initial mouse position
+                startX = e.clientX;
+                startY = e.clientY;
                 
                 // Get current position of the element
                 const rect = navControls.getBoundingClientRect();
@@ -502,11 +647,8 @@
             function drag(e) {
                 if (!isDragging) return;
                 
-                const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-                const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
-                
-                const deltaX = clientX - startX;
-                const deltaY = clientY - startY;
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
                 
                 const newX = initialX + deltaX;
                 const newY = initialY + deltaY;
@@ -537,19 +679,17 @@
             navControls.addEventListener('mousedown', startDrag);
             document.addEventListener('mousemove', drag);
             document.addEventListener('mouseup', endDrag);
-            
-            // Touch events for mobile
-            navControls.addEventListener('touchstart', startDrag);
-            document.addEventListener('touchmove', drag);
-            document.addEventListener('touchend', endDrag);
-            
-            // Prevent click events when dragging
-            navControls.addEventListener('click', function(e) {
-                if (navControls.classList.contains('dragging')) {
-                    e.stopPropagation();
-                }
-            });
         }
+
+        // Prevent double-tap zoom on mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
