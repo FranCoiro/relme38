@@ -206,26 +206,27 @@
         .modal4 .modal-content { border-color: #003893; }
 
         .close {
-            position: absolute;
-            top: 15px;
+            position: fixed;
+            top: 80px;
             right: 20px;
             color: #CE1126;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 1001;
-            width: 35px;
-            height: 35px;
+            z-index: 1002;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid #CE1126;
-            /* Hacer el botón más fácil de tocar en mobile */
-            min-width: 44px;
-            min-height: 44px;
+            background: rgba(255, 255, 255, 0.98);
+            border: 3px solid #CE1126;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            /* Hacer el botón más fácil de tocar */
+            min-width: 50px;
+            min-height: 50px;
         }
 
         .close:hover, .close:focus {
@@ -1116,13 +1117,15 @@
             }
 
             .close {
-                top: 10px;
-                right: 10px;
-                font-size: 24px;
-                width: 40px;
-                height: 40px;
-                min-width: 40px;
-                min-height: 40px;
+                top: 15px;
+                right: 15px;
+                font-size: 30px;
+                width: 55px;
+                height: 55px;
+                min-width: 55px;
+                min-height: 55px;
+                background: rgba(255, 255, 255, 1);
+                box-shadow: 0 6px 20px rgba(0,0,0,0.3);
             }
 
             .evidence-cards-container {
@@ -1298,13 +1301,14 @@
             }
 
             .close {
-                top: 5px;
-                right: 5px;
-                font-size: 20px;
-                width: 35px;
-                height: 35px;
-                min-width: 35px;
-                min-height: 35px;
+                top: 10px;
+                right: 10px;
+                font-size: 26px;
+                width: 50px;
+                height: 50px;
+                min-width: 50px;
+                min-height: 50px;
+                border-width: 2px;
             }
 
             .tpack-circles {
@@ -1686,6 +1690,17 @@
             }, 300);
         }
 
+        // Enhanced modal closing functionality
+        function closeModal(modalNumber) {
+            const modal = document.getElementById(`modal${modalNumber}`);
+            modal.style.opacity = '0';
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
         // Close modal when clicking outside
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
@@ -1702,31 +1717,36 @@
             }
         }
 
-        // Keyboard navigation
+        // Enhanced keyboard navigation
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 const openModal = document.querySelector('.modal[style*="block"]');
                 if (openModal) {
-                    openModal.style.opacity = '0';
-                    setTimeout(() => {
-                        openModal.style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                    }, 300);
+                    const modalId = openModal.id.replace('modal', '');
+                    closeModal(modalId);
                 }
             }
         });
 
-        // Touch events for better mobile interaction
+        // Enhanced touch events for better mobile interaction
         let touchStartY = 0;
         let touchEndY = 0;
+        let isScrolling = false;
 
         document.addEventListener('touchstart', function(e) {
             touchStartY = e.changedTouches[0].screenY;
         });
 
+        document.addEventListener('touchmove', function(e) {
+            isScrolling = true;
+        });
+
         document.addEventListener('touchend', function(e) {
             touchEndY = e.changedTouches[0].screenY;
-            handleSwipe();
+            if (!isScrolling) {
+                handleSwipe();
+            }
+            isScrolling = false;
         });
 
         function handleSwipe() {
@@ -1738,12 +1758,51 @@
                 const openModal = document.querySelector('.modal[style*="block"]');
                 if (openModal) {
                     const modalBody = openModal.querySelector('.modal-body');
-                    if (modalBody.scrollTop === 0) {
-                        closeModal(openModal.id.replace('modal', ''));
+                    if (modalBody && modalBody.scrollTop === 0) {
+                        const modalId = openModal.id.replace('modal', '');
+                        closeModal(modalId);
                     }
                 }
             }
         }
+
+        // Enhanced touch feedback for close button
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            // Add visual feedback on touch
+            closeBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(0.9)';
+                this.style.background = '#CE1126';
+                this.style.color = 'white';
+            });
+            
+            closeBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(1)';
+                this.style.background = 'rgba(255, 255, 255, 0.98)';
+                this.style.color = '#CE1126';
+                
+                // Get modal number and close
+                const modal = this.closest('.modal');
+                if (modal) {
+                    const modalId = modal.id.replace('modal', '');
+                    closeModal(modalId);
+                }
+            });
+
+            // Also handle mouse events for desktop
+            closeBtn.addEventListener('mouseenter', function() {
+                this.style.background = '#CE1126';
+                this.style.color = 'white';
+                this.style.transform = 'scale(1.1)';
+            });
+
+            closeBtn.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(255, 255, 255, 0.98)';
+                this.style.color = '#CE1126';
+                this.style.transform = 'scale(1)';
+            });
+        });
 
         // Animate cards on page load
         window.addEventListener('load', function() {
