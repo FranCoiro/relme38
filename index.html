@@ -261,13 +261,12 @@
             <button class="quick-nav-btn" onclick="goToSlide(3)" title="Intervención temprana">I</button>
             <button class="quick-nav-btn" onclick="goToSlide(4)" title="Propósitos">Pr</button>
             <button class="quick-nav-btn" onclick="goToSlide(5)" title="Diseño metodológico">D</button>
-            <button class="quick-nav-btn" onclick="goToSlide(6)" title="Hallazgos (parte 1)">H1</button>
-            <button class="quick-nav-btn" onclick="goToSlide(7)" title="Principales hallazgos">H2</button>
-            <button class="quick-nav-btn" onclick="goToSlide(8)" title="Comparación de perfiles">C</button>
-            <button class="quick-nav-btn" onclick="goToSlide(9)" title="Proyecciones">Py</button>
-            <button class="quick-nav-btn" onclick="goToSlide(10)" title="Conclusiones">Co</button>
-            <button class="quick-nav-btn" onclick="goToSlide(11)" title="Agradecimientos">A</button>
-            <button class="quick-nav-btn" onclick="goToSlide(12)" title="Referencias">R</button>
+            <button class="quick-nav-btn" onclick="goToSlide(6)" title="Hallazgos (parte 1)">H</button>
+            <button class="quick-nav-btn" onclick="goToSlide(7)" title="Comparación de perfiles">C</button>
+            <button class="quick-nav-btn" onclick="goToSlide(8)" title="Proyecciones">Py</button>
+            <button class="quick-nav-btn" onclick="goToSlide(9)" title="Conclusiones">Co</button>
+            <button class="quick-nav-btn" onclick="goToSlide(10)" title="Agradecimientos">A</button>
+            <button class="quick-nav-btn" onclick="goToSlide(11)" title="Referencias">R</button>
         </div>
 
         <!-- Slide 1: Portada -->
@@ -377,7 +376,7 @@
         <div class="drag-handle" title="Arrastra para mover">⋮⋮</div>
         <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">13</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
         </div>
         <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
     </div>
@@ -389,7 +388,7 @@
 
     <script>
         let currentSlideIndex = 0;
-        const totalSlides = 13;
+        const totalSlides = 12;
         
         const slideTitles = [
             'Portada',
@@ -399,7 +398,6 @@
             'Propósitos',
             'Diseño metodológico',
             'Hallazgos (parte 1)',
-            'Principales hallazgos',
             'Comparación de perfiles',
             'Proyecciones',
             'Conclusiones',
