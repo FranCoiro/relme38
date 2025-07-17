@@ -14,14 +14,14 @@
         body {
             font-family: Arial, sans-serif;
             background: white url('https://i.imgur.com/KXiUrDX.png') no-repeat;
-            background-size: contain;
-            background-position: right center;
+            background-size: cover;
+            background-position: center;
             margin: 0;
             padding: 0;
             color: #333;
             line-height: 1.4;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         body::before {
@@ -29,19 +29,17 @@
         }
 
         .container {
-            width: 100vw;
-            height: 100vh;
-            max-width: 1920px;
-            max-height: 1080px;
+            width: 100%;
+            min-height: 100vh;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 30px 50px;
+            padding: 20px 30px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             position: relative;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(5px);
-            aspect-ratio: 16/9;
         }
 
         @keyframes slideIn {
@@ -127,39 +125,39 @@
         }
 
         .fase-title {
-            font-size: 1.4em;
+            font-size: 1.2em;
             font-weight: bold;
             color: #CE1126;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
             border-bottom: 2px solid #FCDC00;
         }
 
         .fase-content {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .fase-descripcion {
-            font-size: 1.1em;
+            font-size: 0.95em;
             color: #003893;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .lista-items {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .item {
             display: flex;
             align-items: flex-start;
-            padding: 8px 0;
+            padding: 4px 0;
             color: #2d3748;
-            font-size: 1em;
+            font-size: 0.9em;
             line-height: 1.3;
             transition: all 0.3s ease;
             opacity: 0;
