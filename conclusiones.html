@@ -1,1 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conclusiones - RELME 38</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: white url('https://i.imgur.com/U02CilO.png') no-repeat;
+            background-size: contain;
+            background-position: right center;
+            color: #333;
+            line-height: 1.4;
+            height: 100vh;
+            overflow: hidden;
+        }
 
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            margin: 0 auto;
+            padding: 40px 60px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Header */
+        .slide-header {
+            margin-bottom: 25px;
+            flex-shrink: 0;
+        }
+
+        .slide-title {
+            font-size: 2.8em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #CE1126 0%, #003893 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            border-bottom: 4px solid #FCDC00;
+            padding-bottom: 8px;
+            text-align: center;
+            position: relative;
+            animation: titleSlideIn 0.8s ease-out;
+        }
+
+        .slide-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #CE1126, #FCDC00, #003893);
+            animation: borderExpand 1s ease-out 0.5s both;
+        }
+
+        @keyframes titleSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes borderExpand {
+            to {
+                width: 300px;
+            }
+        }
+
+        /* Main content */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        /* Section styling */
+        .conclusion-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 255, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+            border: 2px solid rgba(0, 56, 147, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .conclusion-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, #003893 0%, #CE1126 100%);
+            transition: width 0.3s ease;
+        }
+
+        .conclusion-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .conclusion-section:hover::before {
+            width: 10px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #003893 0%, #CE1126 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #FCDC00 0%, transparent 100%);
+            margin-left: 15px;
+        }
+
+        .section-content {
+            font-size: 1.15em;
+            color: #2d3748;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .section-content:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Bullet points */
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0;
+        }
+
+        .bullet-list li {
+            margin-bottom: 12px;
+            padding: 8px 0 8px 35px;
+            position: relative;
+            line-height: 1.5;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            animation: fadeInLeft 0.6s ease-out calc(0.4s + var(--delay, 0s)) both;
+        }
+
+        .bullet-list li:hover {
+            background: rgba(252, 220, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .bullet-list li::before {
+            content: "✦";
+            color: #CE1126;
+            font-weight: bold;
+            position: absolute;
+            left: 12px;
+            top: 8px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .bullet-list li:hover::before {
+            transform: rotate(90deg) scale(1.2);
+            color: #003893;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Animation delays for list items */
+        .bullet-list li:nth-child(1) { --delay: 0s; }
+        .bullet-list li:nth-child(2) { --delay: 0.1s; }
+        .bullet-list li:nth-child(3) { --delay: 0.2s; }
+        .bullet-list li:nth-child(4) { --delay: 0.3s; }
+
+        /* Quote section */
+        .quote-section {
+            background: rgba(252, 220, 0, 0.2);
+            border: 3px solid #FCDC00;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .quote-icon {
+            font-size: 2em;
+            color: #CE1126;
+            margin-bottom: 10px;
+        }
+
+        .quote-text {
+            font-size: 1.2em;
+            color: #2d3748;
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Highlight text */
+        .highlight {
+            background: #FCDC00;
+            padding: 2px 6px;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+
+        .strong-text {
+            font-weight: bold;
+            color: #CE1126;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .slide-container {
+                padding: 30px 40px;
+            }
+            
+            .slide-title {
+                font-size: 2.4em;
+            }
+            
+            .section-title {
+                font-size: 1.2em;
+            }
+            
+            .section-content {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-container {
+                padding: 20px;
+                height: auto;
+                overflow: visible;
+            }
+            
+            body {
+                height: auto;
+                overflow: visible;
+            }
+            
+            .slide-title {
+                font-size: 2em;
+            }
+            
+            .content-wrapper {
+                gap: 15px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                height: auto;
+                overflow: visible;
+            }
+            
+            .slide-container {
+                height: auto;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">        
+        <div class="slide-header">
+            <h1 class="slide-title">Conclusiones</h1>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Sección 1: Pregunta de investigación -->
+            <div class="conclusion-section">
+                <div class="section-title">🎯 En relación a la pregunta de investigación</div>
+                <div class="section-content">
+                    Este estudio exploratorio <span class="strong-text">inicial</span> permite <span class="highlight">comenzar a comprender</span> que las percepciones de futuros docentes sugieren una formación inicial insuficiente para la integración tecnológica significativa en matemáticas, evidenciando <span class="strong-text">alta valoración de experiencias concretas</span> pero <span class="strong-text">limitadas competencias para la transferencia</span> al aula.
+                </div>
+            </div>
+
+            <!-- Sección 2: Aporte del estudio -->
+            <div class="conclusion-section">
+                <div class="section-title">📚 Síntesis del aporte del estudio</div>
+                <div class="section-content">
+                    Este estudio exploratorio <span class="strong-text">identifica la necesidad urgente</span> de transformar la formación inicial docente y <span class="highlight">establece las bases</span> para:
+                </div>
+                <ul class="bullet-list">
+                    <li><span class="strong-text">Futuro desarrollo</span> de instrumentos de evaluación a mayor escala</li>
+                    <li><span class="strong-text">Diseño fundamentado</span> de programas formativos más pertinentes</li>
+                    <li><span class="strong-text">Comprensión situada</span> de barreras reales en contexto latinoamericano</li>
+                    <li><span class="strong-text">Orientación</span> para investigaciones longitudinales sobre evolución docente</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
