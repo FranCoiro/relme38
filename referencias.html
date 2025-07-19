@@ -1,1 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referencias - RELME 38</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: white url('https://i.imgur.com/U02CilO.png') no-repeat;
+            background-size: contain;
+            background-position: right center;
+            color: #333;
+            line-height: 1.4;
+            height: 100vh;
+            overflow: hidden;
+        }
 
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            max-width: 1920px;
+            max-height: 1080px;
+            margin: 0 auto;
+            padding: 40px 60px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Header */
+        .slide-header {
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .slide-title {
+            font-size: 2.8em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #CE1126 0%, #003893 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            border-bottom: 4px solid #FCDC00;
+            padding-bottom: 8px;
+            text-align: center;
+            position: relative;
+            animation: titleSlideIn 0.8s ease-out;
+        }
+
+        .slide-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #CE1126, #FCDC00, #003893);
+            animation: borderExpand 1s ease-out 0.5s both;
+        }
+
+        /* Main content */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* References container */
+        .references-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 255, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+            border: 2px solid rgba(0, 56, 147, 0.1);
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .references-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, #003893 0%, #CE1126 100%);
+        }
+
+        /* Two column layout */
+        .references-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .references-column {
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .references-column::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .references-column::-webkit-scrollbar-track {
+            background: rgba(0, 56, 147, 0.1);
+            border-radius: 3px;
+        }
+
+        .references-column::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #003893, #CE1126);
+            border-radius: 3px;
+        }
+
+        /* Individual reference styling */
+        .reference-item {
+            margin-bottom: 18px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            border-left: 4px solid #FCDC00;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out calc(0.1s * var(--delay, 0)) both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reference-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(206, 17, 38, 0.1), rgba(0, 56, 147, 0.1));
+            transition: width 0.3s ease;
+        }
+
+        .reference-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border-left-color: #CE1126;
+        }
+
+        .reference-item:hover::before {
+            width: 100%;
+        }
+
+        .reference-text {
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #2d3748;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Author names styling */
+        .authors {
+            font-weight: 600;
+            color: #003893;
+        }
+
+        /* Year styling */
+        .year {
+            color: #CE1126;
+            font-weight: 600;
+        }
+
+        /* Journal/source styling */
+        .journal {
+            font-style: italic;
+            color: #4a5568;
+        }
+
+        /* URL styling */
+        .url {
+            color: #3182ce;
+            font-size: 0.85em;
+            word-break: break-all;
+        }
+
+        /* Animations */
+        @keyframes titleSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes borderExpand {
+            to {
+                width: 300px;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .slide-container {
+                padding: 30px 40px;
+            }
+            
+            .slide-title {
+                font-size: 2.4em;
+            }
+            
+            .reference-text {
+                font-size: 0.85em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-container {
+                padding: 20px;
+                height: auto;
+                overflow: visible;
+            }
+            
+            body {
+                height: auto;
+                overflow: visible;
+            }
+            
+            .references-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .slide-title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">        
+        <div class="slide-header">
+            <h1 class="slide-title">Referencias</h1>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="references-container">
+                <div class="references-grid">
+                    <!-- Columna 1 -->
+                    <div class="references-column">
+                        <div class="reference-item" style="--delay: 1">
+                            <div class="reference-text">
+                                <span class="authors">Akçay, A. O., Karahan, E., & Bozan, M.</span> <span class="year">(2021)</span>. The effect of using technology in primary school mathematics teaching on students' academic achievement: A meta-analysis study. <span class="journal">Forum for International Research in Education</span>, 7(2), 1-21.
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 2">
+                            <div class="reference-text">
+                                <span class="authors">Assinnato, G., Sanz, C., Gorga, G., & Martin, M. V.</span> <span class="year">(2018)</span>. Actitudes y percepciones de docentes y estudiantes en relación a las TIC: Revisión de la literatura. <span class="journal">Revista Iberoamericana de Tecnología en Educación y Educación en Tecnología</span>, 22, 7-17. <span class="url">https://doi.org/10.24215/18509959.22.e01</span>
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 3">
+                            <div class="reference-text">
+                                <span class="authors">Cavanaugh, C., Hargis, J., Kamali, T., & Soto, M.</span> <span class="year">(2015)</span>. Substitution to augmentation: Faculty adoption of iPad mobile learning in higher education. <span class="journal">Interactive Technology and Smart Education</span>, 12(4), 270-284.
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 4">
+                            <div class="reference-text">
+                                <span class="authors">EU Science Hub.</span> <span class="year">(2017)</span>. <span class="journal">European framework for the digital competence of educators: DigCompEdu</span>. Publications Office of the European Union.
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 5">
+                            <div class="reference-text">
+                                <span class="authors">García-Peñalvo, F. J., Corell, A., Abella-García, V., & Grande, M.</span> <span class="year">(2020)</span>. La evaluación online en la educación superior en tiempos de la COVID-19. <span class="journal">Education in the Knowledge Society</span>, 21, 1-26.
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 6">
+                            <div class="reference-text">
+                                <span class="authors">Grandez, M.</span> <span class="year">(2021)</span>. La tecnología como herramienta para la motivación y el aprendizaje significativo en educación básica. <span class="journal">Revista Internacional de Tecnología Educativa y Formación Docente</span>, 15(2), 45-67.
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 7">
+                            <div class="reference-text">
+                                <span class="authors">Hamilton, E. R., Rosenberg, J. M., & Akcaoglu, M.</span> <span class="year">(2016)</span>. The substitution augmentation modification redefinition (SAMR) model: A critical review and suggestions for its use. <span class="journal">TechTrends</span>, 60(5), 433-441.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2 -->
+                    <div class="references-column">
+                        <div class="reference-item" style="--delay: 8">
+                            <div class="reference-text">
+                                <span class="authors">Mishra, P., & Koehler, M. J.</span> <span class="year">(2006)</span>. Technological pedagogical content knowledge: A framework for teacher knowledge. <span class="journal">Teachers College Record</span>, 108(6), 1017-1054.
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 9">
+                            <div class="reference-text">
+                                <span class="authors">Muñoz, J. L., Rodríguez-Gómez, D., & Barrera-Corominas, A.</span> <span class="year">(2022)</span>. Competencias digitales del profesorado para la implementación de metodologías activas de aprendizaje en educación superior. <span class="journal">Revista Complutense de Educación</span>, 33(1), 123-136.
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 10">
+                            <div class="reference-text">
+                                <span class="authors">Pimentel, J. F., Huerto, E., Bejarano, J. A. F., & Sánchez, J. F.</span> <span class="year">(2023)</span>. Competencias digitales en docentes de matemática en la educación básica: Una reflexión teórica. <span class="journal">Revista Religación</span>, 8(37), e2301066.
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 11">
+                            <div class="reference-text">
+                                <span class="authors">Puentedura, R. R.</span> <span class="year">(2006)</span>. <span class="journal">Transformation, technology, and education</span>. <span class="url">http://hippasus.com/resources/tte/</span>
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 12">
+                            <div class="reference-text">
+                                <span class="authors">Salas, R., & Hernández, C.</span> <span class="year">(2021)</span>. Formación docente en competencias digitales para América Latina: Una revisión sistemática. <span class="journal">Educación y Educadores</span>, 24(2), 233-254.
+                            </div>
+                        </div>
+
+                        <div class="reference-item" style="--delay: 13">
+                            <div class="reference-text">
+                                <span class="authors">UNESCO.</span> <span class="year">(2023)</span>. <span class="journal">Technology in education: A tool on whose terms? Global Education Monitoring Report 2023</span>. UNESCO Publishing.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
