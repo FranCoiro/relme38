@@ -51,7 +51,7 @@
             background-color: #000;
         }
 
-        /* Slides 2-12 - Contenido con iframe */
+        /* Slides 2-11 - Contenido con iframe */
         .slide-content {
             width: 100%;
             height: 100vh;
@@ -332,8 +332,7 @@
             <button class="quick-nav-btn" onclick="goToSlide(7)" title="Comparación de perfiles">C</button>
             <button class="quick-nav-btn" onclick="goToSlide(8)" title="Proyecciones">Py</button>
             <button class="quick-nav-btn" onclick="goToSlide(9)" title="Conclusiones">Co</button>
-            <button class="quick-nav-btn" onclick="goToSlide(10)" title="Agradecimientos">A</button>
-            <button class="quick-nav-btn" onclick="goToSlide(11)" title="Referencias">R</button>
+            <button class="quick-nav-btn" onclick="goToSlide(10)" title="Referencias">R</button>
         </div>
 
         <!-- Swipe indicator for mobile -->
@@ -418,15 +417,7 @@
             </div>
         </div>
 
-        <!-- Slide 11: Agradecimientos -->
-        <div class="slide">
-            <div class="slide-content">
-                <div class="loading">Cargando...</div>
-                <iframe class="content-iframe" src="agradecimientos.html" onload="hideLoading(this)" onerror="showError(this)"></iframe>
-            </div>
-        </div>
-
-        <!-- Slide 12: Referencias -->
+        <!-- Slide 11: Referencias -->
         <div class="slide">
             <div class="slide-content">
                 <div class="loading">Cargando...</div>
@@ -440,7 +431,7 @@
         <div class="drag-handle" title="Arrastra para mover">⋮⋮</div>
         <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">11</span>
         </div>
         <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
     </div>
@@ -452,7 +443,7 @@
 
     <script>
         let currentSlideIndex = 0;
-        const totalSlides = 12;
+        const totalSlides = 11;
         
         const slideTitles = [
             'Portada',
@@ -465,7 +456,6 @@
             'Comparación de perfiles',
             'Proyecciones',
             'Conclusiones',
-            'Agradecimientos',
             'Referencias'
         ];
 
